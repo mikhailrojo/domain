@@ -6,16 +6,15 @@ export default ({result, error}) => {
 	if (!result && !error) {
 		return null;
 	}
-	const ok = result === 'ok';
 
 	return (
 		<div>
 			{result && <SnackbarContent
-				message={ok ? `Данный домен уже зарегестирован`: 'Данный домен свободен'}
+				message={result ? `Данный домен уже зарегестирован: ${result}`: 'Данный домен свободен'}
 			/>}
 			{error && <SnackbarContent
 				style={{backgroundColor:'#d32f2f'}}
-				message={`Произошла странная ошибка: ${error}`}
+				message={`Ошибка: ${error}`}
 			/>}
 			<style jsx>
 				{`
