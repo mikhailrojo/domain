@@ -3,7 +3,6 @@
 import actions from '../actionTypes';
 
 export default (state = {}, action) => {
-	console.log(action);
 	switch(action.type) {
 		case actions.ACCEPT_USER_INPUT: {
 			return {

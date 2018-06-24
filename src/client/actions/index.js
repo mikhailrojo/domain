@@ -28,14 +28,15 @@ export const checkDomain= () => async(dispatch, getState) => {
 	const {domain} = getState();
 
 	try {
-		const {data} = await axios.get(`https://htmlweb.ru/analiz/api.php?whois&url=${domain}&json`);
+		const {data} = await axios.get(`api/?domain=${domain}`);
+		console.log(data);
+
+		const {result, error} = data;
+
 		if (data.error) {
-			return dispatch(showError(data.error))
+			return dispatch(showError(error))
 		}
-		if (!data.creation) {
-			return dispatch(showOccurenceResult('not-ok'));
-		}
-		return dispatch(showOccurenceResult('ok'));
+		return dispatch(showOccurenceResult(result));
 
 	} catch (error) {
 		dispatch(showError(error));

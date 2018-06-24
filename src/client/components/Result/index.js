@@ -1,6 +1,13 @@
 "use strict";
 
-import SnackbarContent from '@material-ui/core/SnackbarContent'
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+
+const russifyObj = (obj) => `
+	Домен: ${obj.domain}
+	Владелец: ${obj.person}
+	Создан: ${obj.created}
+	Оплачен до: ${obj['paid-till']}
+`;
 
 export default ({result, error}) => {
 	if (!result && !error) {
@@ -10,7 +17,7 @@ export default ({result, error}) => {
 	return (
 		<div>
 			{result && <SnackbarContent
-				message={result ? `Данный домен уже зарегестирован: ${result}`: 'Данный домен свободен'}
+				message={result}
 			/>}
 			{error && <SnackbarContent
 				style={{backgroundColor:'#d32f2f'}}
@@ -19,8 +26,10 @@ export default ({result, error}) => {
 			<style jsx>
 				{`
 					padding-top: 20px;
+					white-space: pre-line;
 				`}
 			</style>
 		</div>
 	)
 }
+
