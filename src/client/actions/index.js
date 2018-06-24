@@ -29,11 +29,10 @@ export const checkDomain= () => async(dispatch, getState) => {
 
 	try {
 		const {data} = await axios.get(`api/?domain=${domain}`);
-		console.log(data);
 
 		const {result, error} = data;
 
-		if (data.error) {
+		if (error) {
 			return dispatch(showError(error))
 		}
 		return dispatch(showOccurenceResult(result));
