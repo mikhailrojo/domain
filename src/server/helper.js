@@ -12,7 +12,7 @@ module.exports = async(site) => {
 		return getOnlyValuableInfo(stdout, site);
 	} catch (e) {
 		console.log(e);
-		return e;
+		return 'Домен не был найден';
 	}
 };
 
