@@ -23,3 +23,4 @@ function getOnlyValuableInfo(stdout, site) {
 	const resultingArr = stdoutArray.slice(firstItem);
 	return resultingArr.slice(0, -2).join('\n');
 }
+
