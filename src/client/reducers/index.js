@@ -22,14 +22,16 @@ export default (state = {}, action) => {
 			return {
 				...state,
 				isLoading: false,
-				result: action.payload
+				result: action.payload,
+				error: null
 			};
 		}
 		case actions.SHOW_ERROR: {
 			return {
 				...state,
 				isLoading: false,
-				error: action.payload
+				error: action.payload,
+				result: null
 			};
 		}
 		default: {

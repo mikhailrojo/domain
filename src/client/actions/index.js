@@ -2,7 +2,6 @@
 import axios from 'axios';
 import debounce from 'lodash/debounce';
 
-const anxiosGetDebounced = debounce(axios.get, 1000);
 
 import actions from '../actionTypes';
 
@@ -27,13 +26,13 @@ export const showLoader = () => ({
 
 export const checkDomain = () => async(dispatch, getState) => {
 	dispatch(showLoader());
-
+console.log(1)
 	const {domain} = getState();
 
 	try {
-		const {data} = await anxiosGetDebounced(`api/?domain=${domain}`);
+		const ajaxResult = await axios.get(`api/?domain=${domain}`);
 
-		const {result, error} = data;
+		const {result, error} = ajaxResult.data;
 
 		if (error) {
 			return dispatch(showError(error))

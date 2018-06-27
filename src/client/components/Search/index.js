@@ -3,14 +3,21 @@
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
+import debounce from 'lodash/debounce';
+
+
 export default class extends React.Component {
+	throttleRate = 500;
+
 	onChange = (e) => {
 		this.props.onChange(e.target.value);
 	};
 
+	debouncedSubmit = debounce(() => this.props.onSubmit(), this.throttleRate);
+
 	onSubmit = (e) => {
 		e.preventDefault();
-		this.props.onSubmit(e);
+		this.debouncedSubmit();
 	};
 
 	render() {
