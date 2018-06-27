@@ -13,7 +13,7 @@ app.prepare().then(() => {
 
 	const server = express();
 
-	server.get('/api', debounce(api, 2000));
+	server.get('/api', debounce(api, 500));
 
 	server.get('*', (req, res) => handler(req, res));
 	const port = process.env.PORT || 3004;

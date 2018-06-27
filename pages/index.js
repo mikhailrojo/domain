@@ -6,9 +6,12 @@ import reducer from '../src/client/reducers'
 const store = createStore(reducer, applyMiddleware(ReduxThunk));
 
 import SearchContainer from '../src/client/containers/SearchContainer';
+import Layout from '../src/client/components/Layout';
 
 export default () => (
 	<Provider store={store}>
-		<SearchContainer />
+		<Layout>
+			<SearchContainer />
+		</Layout>
 	</Provider>
 );
