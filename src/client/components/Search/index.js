@@ -19,7 +19,7 @@ export default class extends React.Component {
 				<Input
 					fullWidth
 					autoFocus
-					placeholder='Проверить домен на занятость'
+					placeholder='Проверить домен .ru на занятость'
 					onChange={this.onChange}
 				/>
 				<Button

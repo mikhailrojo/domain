@@ -1,19 +1,27 @@
 'use strict';
 
-const {exec: oldExec} = require('child_process');
-const qs = require('querystring');
-const {promisify} = require('util');
+const net = require('net');
 
-const exec = promisify(oldExec);
+/**
+ * Возвращает информацию по домену
+ * @param site
+ * @returns {Promise<string>}
+ */
+module.exports = (site) => {
+	return new Promise((resolve, reject) => {
+		net.createConnection(43, 'whois.tcinet.ru')
+			.on('data', (response) => {
+				const result = getOnlyValuableInfo(response.toString(), site);
 
-module.exports = async(site) => {
-	try {
-		const {stdout} = await exec(`whois ${site}`);
-		return getOnlyValuableInfo(stdout, site);
-	} catch (e) {
-		console.log(e);
-		return 'Домен не был найден';
-	}
+				resolve(result)
+			})
+			.on('error', (error) => {
+				console.log(error);
+				reject('Домен не был найден')
+			})
+			.write(`${site} \r\n`);
+
+	});
 };
 
 function getOnlyValuableInfo(stdout, site) {
@@ -23,4 +31,3 @@ function getOnlyValuableInfo(stdout, site) {
 	const resultingArr = stdoutArray.slice(firstItem);
 	return resultingArr.slice(0, -2).join('\n');
 }
-

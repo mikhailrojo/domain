@@ -1,5 +1,7 @@
 const express = require('express');
 const next = require('next');
+var debounce = require('lodash.debounce');
+
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -11,7 +13,7 @@ app.prepare().then(() => {
 
 	const server = express();
 
-	server.get('/api', api);
+	server.get('/api', debounce(api, 2000));
 
 	server.get('*', (req, res) => handler(req, res));
 	const port = process.env.PORT || 3004;
